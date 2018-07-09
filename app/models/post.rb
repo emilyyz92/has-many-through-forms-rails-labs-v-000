@@ -4,5 +4,8 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :users, through: :comments
 
+  def uniq_users
+    self.users.uniq {|u| u.id }
+  end
 
 end
