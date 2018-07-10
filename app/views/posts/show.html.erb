@@ -14,12 +14,9 @@
 </ul>
 <%= form_for @comment do |f| %>
 <%= f.label :content %>
-<%= f.text_field :content %>
+<%= f.text_field :content %><br>
 Select user:
-<%= f.collection_check_boxes :user_id, User.all, :id, :name %>
-Or create new user:
-<%= f.fields_for :user, post.user.build do |user_fields| %>
-<%= user_fields.text_field :username %>
-<% end %>
+<%= f.collection_check_boxes :user_id, User.all, :id, :username, {:include_blank => true} %>
+<br>
 <%= f.submit %>
 <% end %>
