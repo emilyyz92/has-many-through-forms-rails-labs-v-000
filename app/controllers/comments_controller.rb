@@ -3,8 +3,9 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.create(comment_params)
-    comment.user = User.create(user_params)
-    redirect_to comment.post
+    user = User.create(user_params)
+    user.comments << comment
+    redirect_to post_path(comment.post)
   end
 
   private
