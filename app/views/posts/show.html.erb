@@ -1,11 +1,13 @@
 <h3><%=@post.title%></h3>
 <p><%=@post.content%></p>
 <label>Comments: </label>
-<ul>
-  <% @post.comments.each do |comment| %>
-  <li><%= comment.content %></li>
-  <% end %>
-</ul>
+<% if @post.comments != [] %>
+  <ul>
+    <% @post.comments.each do |comment| %>
+    <li><%=comment.user.username %> says: <%= comment.content %></li>
+    <% end %>
+  </ul>
+<% end %>
 <label>Users: </label>
 <ul>
   <% @post.uniq_users.each do |user| %>
@@ -22,7 +24,7 @@ Select user:
 <br>
 Or create a new one:
 <%= fields_for :user, @comment.user do |user_field| %>
-<%= user_field.text_field :username %>
+<%= user_field.text_field :username, id: "comment_user_attributes_username" %>
 <% end %>
 <%= f.submit %>
 <% end %>
