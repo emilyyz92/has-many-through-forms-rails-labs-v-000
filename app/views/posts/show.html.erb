@@ -2,9 +2,9 @@
 <p><%=@post.content%></p>
 <label>Comments: </label>
 <ul>
-<% @post.comments.each do |comment| %>
-<li><%= comment.content %></li>
-<% end %>
+  <% @post.comments.each do |comment| %>
+  <li><%= comment.content %></li>
+  <% end %>
 </ul>
 <label>Users: </label>
 <ul>
@@ -18,7 +18,7 @@
 <%= f.text_field :content %><br>
 <%= f.hidden_field :post_id %>
 Select user:
-<%= collection_select(:user, :user_id, User.all, :id, :username, {:include_blank => ""}) %>
+<%= collection_select(:comment, :user_id, User.all, :id, :username, {:include_blank => ""}) %>
 <br>
 Or create a new one:
 <%= fields_for :user, @comment.user do |user_field| %>
