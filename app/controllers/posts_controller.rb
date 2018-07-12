@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
-    @comment = @post.comments.build
+    # @comment = @post.comments.build
   end
 
   def index
@@ -14,7 +14,6 @@ class PostsController < ApplicationController
 
   def create
     post = Post.create(post_params)
-    binding.pry
     redirect_to post
   end
 

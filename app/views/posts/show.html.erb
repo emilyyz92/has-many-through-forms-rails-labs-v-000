@@ -15,7 +15,7 @@
   <% end %>
 </ul>
 <label> Leave a comment: </label> <br>
-<%= form_for @comment do |f| %>
+<%= form_for @post.comments.build do |f| %>
 <%= f.label :content %>
 <%= f.text_field :content %><br>
 <%= f.hidden_field :post_id %>
@@ -23,7 +23,7 @@ Select user:
 <%= collection_select(:comment, :user_id, User.all, :id, :username, {:include_blank => ""}) %>
 <br>
 Or create a new one:
-<%= fields_for :user, @comment.user do |user_field| %>
+<%= fields_for :user do |user_field| %>
 <%= user_field.text_field :username, id: "comment_user_attributes_username" %>
 <% end %>
 <%= f.submit %>
