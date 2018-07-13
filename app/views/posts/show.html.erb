@@ -1,6 +1,6 @@
 <h3><%=@post.title%></h3>
 <p><%=@post.content%></p>
-<label>Comments: </label>
+<label>Comments: </label><br>
 <% if @post.comments != [] %>
   <ul>
     <% @post.comments.each do |comment| %>
@@ -8,7 +8,8 @@
     <% end %>
   </ul>
 <% end %>
-<label>Users: </label>
+<br>
+<label>Users: </label><br>
 <ul>
   <% @post.uniq_users.each do |user| %>
   <li><%= user.username %></li>
@@ -16,15 +17,15 @@
 </ul>
 <label> Leave a comment: </label> <br>
 <%= form_for @post.comments.build do |f| %>
-<%= f.label :content %>
-<%= f.text_field :content %><br>
-<%= f.hidden_field :post_id %>
-Select user:
-<%= collection_select(:comment, :user_id, User.all, :id, :username, {:include_blank => ""}) %>
-<br>
-Or create a new one:
-<%= fields_for :user do |user_field| %>
-<%= user_field.text_field :username, id: "comment_user_attributes_username" %>
-<% end %>
-<%= f.submit %>
+  <%= f.label :content %>
+  <%= f.text_field :content %><br>
+  <%= f.hidden_field :post_id %>
+  Select user:
+  <%= collection_select(:comment, :user_id, User.all, :id, :username, {:include_blank => ""}) %>
+  <br>
+  Or create a new one:
+  <%= f.fields_for :user_id do |user_field| %>
+  <%= user_field.text_field :username %>
+  <% end %>
+  <%= f.submit %>
 <% end %>
