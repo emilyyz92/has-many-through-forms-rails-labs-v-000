@@ -1,13 +1,11 @@
 <h3><%=@post.title%></h3>
 <p><%=@post.content%></p>
 <label>Comments: </label><br>
-<% if @post.comments != [] %>
   <ul>
     <% @post.comments.each do |comment| %>
-    <li><%=comment.user.username %> says: <%= comment.content %></li>
+    <li><%=comment.username %> says: <%= comment.content %></li>
     <% end %>
   </ul>
-<% end %>
 <br>
 <label>Users: </label><br>
 <ul>
@@ -16,16 +14,16 @@
   <% end %>
 </ul>
 <label> Leave a comment: </label> <br>
-<%= form_for @post.comments.build do |f| %>
+<%= form_for @comment do |f| %>
   <%= f.label :content %>
   <%= f.text_field :content %><br>
   <%= f.hidden_field :post_id %>
   Select user:
-  <%= collection_select(:comment, :user_id, User.all, :id, :username, {:include_blank => ""}) %>
+  <%= f.collection_select(:user_id, User.all, :id, :username, {:include_blank => ""}) %>
   <br>
   Or create a new one:
-  <%= f.fields_for :user_id do |user_field| %>
-  <%= user_field.text_field :username %>
+  <%= f.fields_for :user, @comment.build_user do |user_field| %>
+    <%= user_field.text_field :username %>
   <% end %>
   <%= f.submit %>
 <% end %>
