@@ -3,7 +3,7 @@
 <label>Comments: </label><br>
   <ul>
     <% @post.comments.each do |comment| %>
-    <li><%=comment.username %> says: <%= comment.content %></li>
+    <li><%= comment.username %> says: <%= comment.content %></li>
     <% end %>
   </ul>
 <br>
