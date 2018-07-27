@@ -3,6 +3,7 @@
 <label>Comments: </label><br>
   <ul>
     <% @post.comments.each do |comment| %>
+    <% binding.pry %>
     <li><%= comment.username %> says: <%= comment.content %></li>
     <% end %>
   </ul>
