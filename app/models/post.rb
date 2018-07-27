@@ -9,4 +9,11 @@ class Post < ActiveRecord::Base
     self.users.uniq {|u| u.id }
   end
 
+  def categories_attributes=(categories_attributes)
+    categories_attributes.values.each do |category_attribute|
+      category = Category.find_or_create_by(category_attribute)
+      self.categories << category
+    end
+  end
+
 end

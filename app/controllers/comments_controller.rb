@@ -3,10 +3,6 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.create(comment_params)
-    if user_params[:username] != ""
-      user = User.create(user_params)
-      user.comments << comment
-    end
 
     redirect_to post_path(comment.post)
   end
